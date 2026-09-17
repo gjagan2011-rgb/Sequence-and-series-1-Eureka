@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sequences &amp; Series — Worksheet 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['$', '$']], displayMath: [['$$','$$']] },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+<style>
+  :root {
+    --bg: #f7f5f1;
+    --surface: #ffffff;
+    --surface-2: #f0eee8;
+    --text: #201d1a;
+    --text-dim: #6b665f;
+    --border: #e2ddd3;
+    --accent-1: #2f6f6a;   /* single correct - teal */
+    --accent-2: #7c4dbb;   /* multi correct - purple */
+    --accent-3: #b45d19;   /* matrix match - amber */
+    --accent-4: #2e5aac;   /* numerical - blue */
+    --correct: #1a7d3c;
+    --correct-bg: #e5f5ea;
+    --wrong: #c23c3c;
+    --wrong-bg: #fbeaea;
+    --chip-bg: #eee9e0;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --bg: #17161a;
+      --surface: #201f24;
+      --surface-2: #26252b;
+      --text: #ece9e4;
+      --text-dim: #a49e93;
+      --border: #37353c;
+      --accent-1: #57b3ac;
+      --accent-2: #b18ae0;
+      --accent-3: #e0a05c;
+      --accent-4: #7ea3e6;
+      --correct: #4fbf7a;
+      --correct-bg: #163425;
+      --wrong: #e17575;
+      --wrong-bg: #3a1f20;
+      --chip-bg: #2d2b32;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17161a;
+    --surface: #201f24;
+    --surface-2: #26252b;
+    --text: #ece9e4;
+    --text-dim: #a49e93;
+    --border: #37353c;
+    --accent-1: #57b3ac;
+    --accent-2: #b18ae0;
+    --accent-3: #e0a05c;
+    --accent-4: #7ea3e6;
+    --correct: #4fbf7a;
+    --correct-bg: #163425;
+    --wrong: #e17575;
+    --wrong-bg: #3a1f20;
+    --chip-bg: #2d2b32;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    line-height: 1.55;
+    padding: 0 0 80px 0;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+
+  header.top {
+    background: linear-gradient(135deg, #1f3a3d, #35304f 65%, #4a2f2f);
+    color: #f4f1ea;
+    padding: 46px 20px 38px;
+    margin-bottom: 34px;
+  }
+  header.top .inner { max-width: 880px; margin: 0 auto; }
+  header.top .tag {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 12px;
+    opacity: 0.75;
+    margin-bottom: 10px;
+  }
+  header.top h1 { font-size: 30px; margin: 0 0 8px; font-weight: 600; }
+  header.top p.sub { font-family: 'Helvetica Neue', Arial, sans-serif; opacity: 0.85; margin: 0; font-size: 14.5px; max-width: 620px;}
+
+  .progress-bar {
+    max-width: 880px; margin: -20px auto 30px; padding: 0 20px;
+  }
+  .progress-track {
+    height: 8px; background: var(--surface-2); border-radius: 5px; overflow: hidden; border: 1px solid var(--border);
+  }
+  .progress-fill { height: 100%; width: 0%; background: var(--accent-4); transition: width 0.3s ease; }
+  .progress-label { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12.5px; color: var(--text-dim); margin-top: 6px; }
+
+  section.block { margin-bottom: 46px; }
+  .section-head {
+    display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px;
+  }
+  .section-head .num {
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 700; font-size: 13px;
+    color: var(--surface); background: var(--accent-c); padding: 3px 9px; border-radius: 20px;
+  }
+  .section-head h2 { font-size: 20px; margin: 0; font-weight: 600; }
+  .section-desc { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13.5px; color: var(--text-dim); margin: 6px 0 22px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px 20px;
+    margin-bottom: 18px;
+    border-left: 4px solid var(--accent-c);
+  }
+  .qnum { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12.5px; font-weight: 700; color: var(--accent-c); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .qtext { font-size: 16.5px; margin-bottom: 16px; }
+
+  .options { display: grid; gap: 9px; }
+  .opt {
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14.5px;
+    display: flex; align-items: center; gap: 11px;
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; cursor: pointer; transition: background 0.15s, border-color 0.15s;
+  }
+  .opt:hover { border-color: var(--accent-c); }
+  .opt .mark {
+    width: 20px; height: 20px; flex: 0 0 20px; border: 1.5px solid var(--text-dim);
+    display: flex; align-items: center; justify-content: center; font-size: 12px; color: transparent;
+  }
+  .opt.single .mark { border-radius: 50%; }
+  .opt.multi .mark { border-radius: 4px; }
+  .opt.selected { background: color-mix(in srgb, var(--accent-c) 14%, var(--surface)); border-color: var(--accent-c); }
+  .opt.selected .mark { background: var(--accent-c); border-color: var(--accent-c); color: #fff; }
+  .opt .label { color: var(--text-dim); font-weight: 700; margin-right: 2px; }
+
+  .opt.correct-answer { background: var(--correct-bg); border-color: var(--correct); }
+  .opt.wrong-answer { background: var(--wrong-bg); border-color: var(--wrong); }
+
+  .explain {
+    display: none; margin-top: 16px; padding: 14px 16px; border-radius: 8px;
+    background: var(--surface-2); border: 1px dashed var(--border); font-size: 14.5px;
+  }
+  .explain.show { display: block; }
+  .explain .verdict { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 700; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .explain .verdict.right { color: var(--correct); }
+  .explain .verdict.wrong { color: var(--wrong); }
+
+  /* numerical */
+  .num-input-row { display: flex; align-items: center; gap: 10px; }
+  input.numans {
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 15px;
+    width: 130px; padding: 9px 12px; border-radius: 8px; border: 1.5px solid var(--border);
+    background: var(--surface-2); color: var(--text);
+  }
+  input.numans:focus { outline: none; border-color: var(--accent-c); }
+  input.numans.correct-answer { border-color: var(--correct); background: var(--correct-bg); }
+  input.numans.wrong-answer { border-color: var(--wrong); background: var(--wrong-bg); }
+  .hint-txt { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12.5px; color: var(--text-dim); }
+
+  /* matrix match */
+  .mm-table { width: 100%; border-collapse: collapse; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14.5px; margin-bottom: 6px;}
+  .mm-row { display: grid; grid-template-columns: minmax(140px, 1.3fr) 2fr; gap: 14px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .mm-row:last-child { border-bottom: none; }
+  .mm-left { font-size: 15px; }
+  .mm-left .tagletter { font-weight: 700; color: var(--accent-c); margin-right: 6px; }
+  .mm-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip {
+    padding: 6px 12px; border-radius: 20px; background: var(--chip-bg); border: 1px solid var(--border);
+    cursor: pointer; font-size: 13.5px; transition: background 0.15s, border-color 0.15s;
+  }
+  .chip:hover { border-color: var(--accent-c); }
+  .chip.selected { background: var(--accent-c); color: #fff; border-color: var(--accent-c); }
+  .chip.correct-answer { background: var(--correct); color: #fff; border-color: var(--correct); }
+  .chip.wrong-answer { background: var(--wrong); color: #fff; border-color: var(--wrong); text-decoration: line-through; }
+  .chip.missed-answer { background: var(--surface); color: var(--correct); border: 1.5px dashed var(--correct); }
+
+  .colII-key { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: var(--text-dim); margin-bottom: 14px; background: var(--surface-2); padding: 10px 14px; border-radius: 8px;}
+
+  .checkbtn-wrap {
+    position: sticky; bottom: 0; background: linear-gradient(to top, var(--bg) 70%, transparent); padding: 18px 0 4px;
+    display: flex; justify-content: center; gap: 12px; font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+  button.action {
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 700; font-size: 14.5px;
+    padding: 13px 30px; border-radius: 30px; border: none; cursor: pointer;
+    background: var(--text); color: var(--bg); transition: transform 0.12s;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  }
+  button.action:hover { transform: translateY(-1px); }
+  button.action.secondary { background: transparent; color: var(--text); border: 1.5px solid var(--border); box-shadow: none; }
+
+  .score-banner {
+    display: none; text-align: center; font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 26px 20px; margin: 0 0 34px; 
+  }
+  .score-banner.show { display: block; }
+  .score-banner .big { font-size: 34px; font-weight: 800; margin-bottom: 4px; }
+  .score-banner .sub { color: var(--text-dim); font-size: 13.5px; }
+
+  footer.note { text-align: center; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12.5px; color: var(--text-dim); padding: 30px 20px 0; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="inner">
+    <div class="tag">Worksheet 1 · Sequences &amp; Series</div>
+    <h1>Sequences &amp; Series</h1>
+    <p class="sub">14 questions across four formats — single correct, one‑or‑more correct, matrix match, and numerical value. Answer at your own pace, then check your work at the bottom for full solutions.</p>
+  </div>
+</header>
+
+<div class="progress-bar">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">0 of 14 answered</div>
+</div>
+
+<div class="wrap">
+
+  <div class="score-banner" id="scoreBanner">
+    <div class="big" id="scoreBig">—</div>
+    <div class="sub" id="scoreSub"></div>
+  </div>
+
+  <!-- SECTION 1: SINGLE CORRECT -->
+  <section class="block" style="--accent-c: var(--accent-1);">
+    <div class="section-head"><span class="num">Section 1</span><h2>Single Correct Answer</h2></div>
+    <p class="section-desc">Exactly one option is correct. Click an option to select it.</p>
+    <div id="singleContainer"></div>
+  </section>
+
+  <!-- SECTION 2: MULTI CORRECT -->
+  <section class="block" style="--accent-c: var(--accent-2);">
+    <div class="section-head"><span class="num">Section 2</span><h2>One or More Than One Correct</h2></div>
+    <p class="section-desc">One, two, three, or all four options may be correct. Select every option you believe is true.</p>
+    <div id="multiContainer"></div>
+  </section>
+
+  <!-- SECTION 3: MATRIX MATCH -->
+  <section class="block" style="--accent-c: var(--accent-3);">
+    <div class="section-head"><span class="num">Section 3</span><h2>Matrix Match</h2></div>
+    <p class="section-desc">Match each entry in Column I to one or more entries in Column II by tapping the matching chips.</p>
+    <div id="matrixContainer"></div>
+  </section>
+
+  <!-- SECTION 4: NUMERICAL -->
+  <section class="block" style="--accent-c: var(--accent-4);">
+    <div class="section-head"><span class="num">Section 4</span><h2>Numerical Value</h2></div>
+    <p class="section-desc">Type the exact numerical answer (an integer) in the box.</p>
+    <div id="numContainer"></div>
+  </section>
+
+  <div class="checkbtn-wrap">
+    <button class="action secondary" id="resetBtn">Reset</button>
+    <button class="action" id="checkBtn">Check All Answers</button>
+  </div>
+
+  <footer class="note">Your answers and progress are stored only in this browser tab.</footer>
+</div>
+
+<script>
+/* ---------------- DATA ---------------- */
+
+const singleQ = [
+  {
+    q: "If $S_n = 3n^2+5n$ is the sum of the first $n$ terms of an A.P., then its $10^{\\text{th}}$ term is:",
+    options: ["56", "60", "62", "68"],
+    correct: 2,
+    explain: "$T_{10}=S_{10}-S_9$. Here $S_{10}=3(10)^2+5(10)=350$ and $S_9=3(9)^2+5(9)=288$, so $T_{10}=350-288=62$."
+  },
+  {
+    q: "The sum to infinity of the series $1+\\dfrac{2}{5}+\\dfrac{3}{5^2}+\\dfrac{4}{5^3}+\\cdots$ is:",
+    options: ["$\\dfrac{5}{4}$", "$\\dfrac{25}{16}$", "$\\dfrac{5}{16}$", "$\\dfrac{25}{4}$"],
+    correct: 1,
+    explain: "This is an arithmetico‑geometric series with $n^{\\text{th}}$ term $\\dfrac{n}{5^{n-1}}$. Using $\\sum_{n\\ge1} n x^{n-1}=\\dfrac{1}{(1-x)^2}$ with $x=\\dfrac15$, the sum is $\\dfrac{1}{(4/5)^2}=\\dfrac{25}{16}$."
+  },
+  {
+    q: "If $a,b,c$ are in G.P. and $a^{x}=b^{y}=c^{z}$ (all non‑zero), then $x,y,z$ are in:",
+    options: ["A.P.", "G.P.", "H.P.", "None of these"],
+    correct: 2,
+    explain: "Let $a^{x}=b^{y}=c^{z}=k$, so $a=k^{1/x}, b=k^{1/y}, c=k^{1/z}$. Since $b^2=ac$, we get $k^{2/y}=k^{1/x+1/z}$, i.e. $\\dfrac{2}{y}=\\dfrac1x+\\dfrac1z$. So $\\dfrac1x,\\dfrac1y,\\dfrac1z$ are in A.P., which means $x,y,z$ are in H.P."
+  },
+  {
+    q: "If $a,b,c$ are in H.P., then $\\dfrac{a}{b+c-a},\\ \\dfrac{b}{c+a-b},\\ \\dfrac{c}{a+b-c}$ are in:",
+    options: ["A.P.", "G.P.", "H.P.", "None of these"],
+    correct: 2,
+    explain: "A standard identity: if $a,b,c$ are in H.P., taking reciprocals of the three expressions gives terms in A.P., so the expressions themselves are in H.P. (Check with $a=1,b=1.5,c=3$: the three values are $0.2857,\\,0.6,\\,-6$, whose reciprocals $3.5,\\,1.667,\\,-0.167$ are indeed in A.P.)"
+  }
+];
+
+const multiQ = [
+  {
+    q: "Let $a_1,a_2,\\ldots,a_n$ be in A.P. with common difference $d\\neq0$. Which of the following is/are always true?",
+    options: [
+      "$\\dfrac{1}{a_1a_2}+\\dfrac{1}{a_2a_3}+\\cdots+\\dfrac{1}{a_{n-1}a_n}=\\dfrac{n-1}{a_1a_n}$",
+      "$a_1+a_n=a_2+a_{n-1}$",
+      "Sum of first $n$ terms $=\\dfrac{n}{2}(a_1+a_n)$",
+      "$a_1,a_3,a_5,\\ldots$ are in A.P. with common difference $d$"
+    ],
+    correct: [0,1,2],
+    explain: "(A), (B), (C) are standard A.P. identities (A telescopes via $\\frac1d\\left(\\frac{1}{a_k}-\\frac{1}{a_{k+1}}\\right)$). (D) is false — the odd‑indexed terms form an A.P. with common difference $2d$, not $d$."
+  },
+  {
+    q: "Let $S_n$ denote the sum of the first $n$ terms of a G.P. with first term $a>0$ and common ratio $r\\neq1$. Which of the following is/are correct?",
+    options: [
+      "$S_{2n}=S_n(1+r^{n})$",
+      "$S_{3n}-S_{2n}=r^{2n}S_n$",
+      "$S_n,\\ S_{2n}-S_n,\\ S_{3n}-S_{2n}$ are in G.P.",
+      "If $r>1$, the sum to infinity exists and equals $\\dfrac{a}{1-r}$"
+    ],
+    correct: [0,1,2],
+    explain: "(A)–(C) follow directly from $S_n=\\dfrac{a(r^n-1)}{r-1}$; each block of $n$ terms is the previous block scaled by $r^n$. (D) is false — an infinite G.P. only converges when $|r|<1$."
+  },
+  {
+    q: "If $a,b,c$ are positive real numbers in A.P., which of the following must be true?",
+    options: [
+      "$b^2\\ge ac$",
+      "$\\dfrac1a,\\dfrac1b,\\dfrac1c$ are always in A.P.",
+      "$a+c=2b$",
+      "$a,b,c$ can also be in G.P. only when $a=b=c$"
+    ],
+    correct: [0,2,3],
+    explain: "(A) follows from AM $\\ge$ GM: $b=\\frac{a+c}{2}\\ge\\sqrt{ac}$. (C) is the definition of an A.P. (D) is true — being simultaneously in A.P. and G.P. forces $a=b=c$. (B) is false in general (that would make $a,b,c$ an H.P., not automatic for an A.P.)."
+  }
+];
+
+const matrixQ = [
+  {
+    title: "Match each series (Column I) with its closed‑form sum (Column II). Each item in Column I matches exactly one item in Column II.",
+    colI: [
+      { label: "A", text: "$1+2+3+\\cdots+n$" },
+      { label: "B", text: "$1^2+2^2+\\cdots+n^2$" },
+      { label: "C", text: "$1^3+2^3+\\cdots+n^3$" },
+      { label: "D", text: "$1+3+5+\\cdots+(2n-1)$" }
+    ],
+    colII: [
+      { label: "P", text: "$n^2$" },
+      { label: "Q", text: "$\\dfrac{n(n+1)}{2}$" },
+      { label: "R", text: "$\\dfrac{n(n+1)(2n+1)}{6}$" },
+      { label: "S", text: "$\\left[\\dfrac{n(n+1)}{2}\\right]^2$" }
+    ],
+    correct: { A: ["Q"], B: ["R"], C: ["S"], D: ["P"] },
+    explain: "These are the standard closed forms: $\\sum n=\\frac{n(n+1)}2$ (A–Q), $\\sum n^2=\\frac{n(n+1)(2n+1)}6$ (B–R), $\\sum n^3=\\left[\\frac{n(n+1)}2\\right]^2$ (C–S), and the sum of the first $n$ odd numbers is $n^2$ (D–P)."
+  },
+  {
+    title: "Match each condition on $a,b,c$ (Column I) with the relation(s) it forces (Column II). An entry in Column I may match more than one entry in Column II.",
+    colI: [
+      { label: "A", text: "$a,b,c$ are in A.P." },
+      { label: "B", text: "$a,b,c$ are in G.P." },
+      { label: "C", text: "$a,b,c$ are in H.P." },
+      { label: "D", text: "$b$ is simultaneously the A.M. and the G.M. of $a$ and $c$" }
+    ],
+    colII: [
+      { label: "P", text: "$b^2=ac$" },
+      { label: "Q", text: "$2b=a+c$" },
+      { label: "R", text: "$b=\\dfrac{2ac}{a+c}$" },
+      { label: "S", text: "$a=b=c$" }
+    ],
+    correct: { A: ["Q"], B: ["P"], C: ["R"], D: ["P","Q","S"] },
+    explain: "A–Q, B–P, C–R are the defining relations of A.P., G.P., H.P. respectively. For D: if $b$ is both the A.M. ($2b=a+c$) and G.M. ($b^2=ac$) of $a,c$, then AM = GM forces $a=c$, hence $a=b=c$ — so D matches P, Q, and S."
+  }
+];
+
+const numQ = [
+  {
+    q: "The value of $1^2-2^2+3^2-4^2+\\cdots+19^2-20^2 = -N$. Find $N$.",
+    answer: 210,
+    explain: "Pair terms: $(2k-1)^2-(2k)^2=1-4k$ for $k=1,\\ldots,10$. Summing, $\\sum_{k=1}^{10}(1-4k)=10-4(55)=-210$. So $N=210$."
+  },
+  {
+    q: "Three positive numbers are in G.P.; their sum is $21$ and their product is $216$. The middle term is ____.",
+    answer: 6,
+    explain: "Let the terms be $\\dfrac{a}{r},a,ar$. Product $=a^3=216\\Rightarrow a=6$ (the middle term). Sum check: with $a=6$, $\\frac{6}{r}+6+6r=21\\Rightarrow r=2$ or $r=\\frac12$, giving terms $3,6,12$."
+  },
+  {
+    q: "If $S_n=n^2+3n$ is the sum of the first $n$ terms of a series, its $15^{\\text{th}}$ term is ____.",
+    answer: 32,
+    explain: "$T_{15}=S_{15}-S_{14}=(225+45)-(196+42)=270-238=32$."
+  },
+  {
+    q: "If $\\dfrac{1}{1\\cdot2}+\\dfrac{1}{2\\cdot3}+\\dfrac{1}{3\\cdot4}+\\cdots+\\dfrac{1}{n(n+1)}=\\dfrac{99}{100}$, then $n=$ ____.",
+    answer: 99,
+    explain: "By partial fractions, $\\dfrac{1}{k(k+1)}=\\dfrac1k-\\dfrac1{k+1}$, so the sum telescopes to $1-\\dfrac{1}{n+1}=\\dfrac{n}{n+1}$. Setting $\\dfrac{n}{n+1}=\\dfrac{99}{100}$ gives $n=99$."
+  }
+];
+
+/* ---------------- STATE ---------------- */
+const state = {
+  single: new Array(singleQ.length).fill(null),
+  multi: multiQ.map(q => new Array(q.options.length).fill(false)),
+  matrix: matrixQ.map(q => Object.fromEntries(q.colI.map(r => [r.label, new Set()]))),
+  num: new Array(numQ.length).fill("")
+};
+let checked = false;
+
+/* ---------------- RENDER ---------------- */
+const singleContainer = document.getElementById('singleContainer');
+singleQ.forEach((item, qi) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.style.setProperty('--accent-c', 'var(--accent-1)');
+  card.innerHTML = `
+    <div class="qnum">Question ${qi+1}</div>
+    <div class="qtext">${item.q}</div>
+    <div class="options" id="single-opts-${qi}"></div>
+    <div class="explain" id="single-explain-${qi}"><div class="verdict"></div><div class="body"></div></div>
+  `;
+  singleContainer.appendChild(card);
+  const optsDiv = card.querySelector(`#single-opts-${qi}`);
+  const letters = ['A','B','C','D'];
+  item.options.forEach((opt, oi) => {
+    const el = document.createElement('div');
+    el.className = 'opt single';
+    el.innerHTML = `<div class="mark">✓</div><div><span class="label">(${letters[oi]})</span>${opt}</div>`;
+    el.addEventListener('click', () => {
+      if (checked) return;
+      state.single[qi] = oi;
+      Array.from(optsDiv.children).forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      updateProgress();
+    });
+    optsDiv.appendChild(el);
+  });
+});
+
+const multiContainer = document.getElementById('multiContainer');
+multiQ.forEach((item, qi) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.style.setProperty('--accent-c', 'var(--accent-2)');
+  card.innerHTML = `
+    <div class="qnum">Question ${qi+1}</div>
+    <div class="qtext">${item.q}</div>
+    <div class="options" id="multi-opts-${qi}"></div>
+    <div class="explain" id="multi-explain-${qi}"><div class="verdict"></div><div class="body"></div></div>
+  `;
+  multiContainer.appendChild(card);
+  const optsDiv = card.querySelector(`#multi-opts-${qi}`);
+  const letters = ['A','B','C','D'];
+  item.options.forEach((opt, oi) => {
+    const el = document.createElement('div');
+    el.className = 'opt multi';
+    el.innerHTML = `<div class="mark">✓</div><div><span class="label">(${letters[oi]})</span>${opt}</div>`;
+    el.addEventListener('click', () => {
+      if (checked) return;
+      state.multi[qi][oi] = !state.multi[qi][oi];
+      el.classList.toggle('selected');
+      updateProgress();
+    });
+    optsDiv.appendChild(el);
+  });
+});
+
+const matrixContainer = document.getElementById('matrixContainer');
+matrixQ.forEach((item, qi) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.style.setProperty('--accent-c', 'var(--accent-3)');
+  const keyHtml = item.colII.map(c => `<strong>(${c.label})</strong> ${c.text}`).join('&nbsp;&nbsp;·&nbsp;&nbsp;');
+  card.innerHTML = `
+    <div class="qnum">Question ${qi+1}</div>
+    <div class="qtext">${item.title}</div>
+    <div class="colII-key">Column II — ${keyHtml}</div>
+    <div id="matrix-rows-${qi}"></div>
+    <div class="explain" id="matrix-explain-${qi}"><div class="verdict"></div><div class="body"></div></div>
+  `;
+  matrixContainer.appendChild(card);
+  const rowsDiv = card.querySelector(`#matrix-rows-${qi}`);
+  item.colI.forEach(row => {
+    const rowEl = document.createElement('div');
+    rowEl.className = 'mm-row';
+    rowEl.innerHTML = `
+      <div class="mm-left"><span class="tagletter">(${row.label})</span>${row.text}</div>
+      <div class="mm-chips" id="mm-chips-${qi}-${row.label}"></div>
+    `;
+    rowsDiv.appendChild(rowEl);
+    const chipsDiv = rowEl.querySelector(`#mm-chips-${qi}-${row.label}`);
+    item.colII.forEach(col => {
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.textContent = `(${col.label})`;
+      chip.addEventListener('click', () => {
+        if (checked) return;
+        const set = state.matrix[qi][row.label];
+        if (set.has(col.label)) { set.delete(col.label); chip.classList.remove('selected'); }
+        else { set.add(col.label); chip.classList.add('selected'); }
+        updateProgress();
+      });
+      chipsDiv.appendChild(chip);
+    });
+  });
+});
+
+const numContainer = document.getElementById('numContainer');
+numQ.forEach((item, qi) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.style.setProperty('--accent-c', 'var(--accent-4)');
+  card.innerHTML = `
+    <div class="qnum">Question ${qi+1}</div>
+    <div class="qtext">${item.q}</div>
+    <div class="num-input-row">
+      <input type="text" inputmode="numeric" class="numans" id="num-input-${qi}" placeholder="Answer">
+      <span class="hint-txt">enter an integer</span>
+    </div>
+    <div class="explain" id="num-explain-${qi}"><div class="verdict"></div><div class="body"></div></div>
+  `;
+  numContainer.appendChild(card);
+  const input = card.querySelector(`#num-input-${qi}`);
+  input.addEventListener('input', () => {
+    if (checked) return;
+    state.num[qi] = input.value.trim();
+    updateProgress();
+  });
+});
+
+/* ---------------- PROGRESS ---------------- */
+function updateProgress() {
+  let answered = 0;
+  const total = singleQ.length + multiQ.length + matrixQ.length + numQ.length;
+  state.single.forEach(v => { if (v !== null) answered++; });
+  state.multi.forEach(arr => { if (arr.some(x => x)) answered++; });
+  state.matrix.forEach(rowObj => { if (Object.values(rowObj).some(s => s.size > 0)) answered++; });
+  state.num.forEach(v => { if (v !== "") answered++; });
+  const pct = Math.round((answered/total)*100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${answered} of ${total} answered`;
+}
+updateProgress();
+
+/* ---------------- CHECK ---------------- */
+document.getElementById('checkBtn').addEventListener('click', () => {
+  checked = true;
+  let correctCount = 0;
+  const totalCount = singleQ.length + multiQ.length + matrixQ.length + numQ.length;
+
+  // single
+  singleQ.forEach((item, qi) => {
+    const optsDiv = document.getElementById(`single-opts-${qi}`);
+    const chosen = state.single[qi];
+    const isRight = chosen === item.correct;
+    if (isRight) correctCount++;
+    Array.from(optsDiv.children).forEach((el, oi) => {
+      if (oi === item.correct) el.classList.add('correct-answer');
+      else if (oi === chosen) el.classList.add('wrong-answer');
+    });
+    const exp = document.getElementById(`single-explain-${qi}`);
+    exp.classList.add('show');
+    exp.querySelector('.verdict').textContent = isRight ? 'Correct' : 'Incorrect';
+    exp.querySelector('.verdict').className = 'verdict ' + (isRight ? 'right' : 'wrong');
+    exp.querySelector('.body').innerHTML = item.explain;
+  });
+
+  // multi
+  multiQ.forEach((item, qi) => {
+    const optsDiv = document.getElementById(`multi-opts-${qi}`);
+    const chosenSet = new Set(state.multi[qi].map((v,i) => v ? i : -1).filter(i => i>=0));
+    const correctSet = new Set(item.correct);
+    const isRight = chosenSet.size === correctSet.size && [...chosenSet].every(i => correctSet.has(i));
+    if (isRight) correctCount++;
+    Array.from(optsDiv.children).forEach((el, oi) => {
+      const wasChosen = chosenSet.has(oi);
+      const isCorrectOpt = correctSet.has(oi);
+      if (isCorrectOpt && wasChosen) el.classList.add('correct-answer');
+      else if (isCorrectOpt && !wasChosen) el.classList.add('correct-answer');
+      else if (!isCorrectOpt && wasChosen) el.classList.add('wrong-answer');
+    });
+    const exp = document.getElementById(`multi-explain-${qi}`);
+    exp.classList.add('show');
+    exp.querySelector('.verdict').textContent = isRight ? 'Correct' : 'Incorrect';
+    exp.querySelector('.verdict').className = 'verdict ' + (isRight ? 'right' : 'wrong');
+    exp.querySelector('.body').innerHTML = item.explain;
+  });
+
+  // matrix
+  matrixQ.forEach((item, qi) => {
+    let rowsAllRight = true;
+    item.colI.forEach(row => {
+      const chipsDiv = document.getElementById(`mm-chips-${qi}-${row.label}`);
+      const chosenSet = state.matrix[qi][row.label];
+      const correctSet = new Set(item.correct[row.label]);
+      const rowRight = chosenSet.size === correctSet.size && [...chosenSet].every(l => correctSet.has(l));
+      if (!rowRight) rowsAllRight = false;
+      Array.from(chipsDiv.children).forEach(chip => {
+        const label = chip.textContent.replace(/[()]/g,'');
+        const wasChosen = chosenSet.has(label);
+        const isCorrectOpt = correctSet.has(label);
+        chip.classList.remove('selected');
+        if (isCorrectOpt && wasChosen) chip.classList.add('correct-answer');
+        else if (isCorrectOpt && !wasChosen) chip.classList.add('missed-answer');
+        else if (!isCorrectOpt && wasChosen) chip.classList.add('wrong-answer');
+      });
+    });
+    if (rowsAllRight) correctCount++;
+    const exp = document.getElementById(`matrix-explain-${qi}`);
+    exp.classList.add('show');
+    exp.querySelector('.verdict').textContent = rowsAllRight ? 'Correct' : 'Incorrect';
+    exp.querySelector('.verdict').className = 'verdict ' + (rowsAllRight ? 'right' : 'wrong');
+    exp.querySelector('.body').innerHTML = item.explain;
+  });
+
+  // numerical
+  numQ.forEach((item, qi) => {
+    const input = document.getElementById(`num-input-${qi}`);
+    const val = parseFloat(state.num[qi]);
+    const isRight = !isNaN(val) && val === item.answer;
+    if (isRight) correctCount++;
+    input.classList.add(isRight ? 'correct-answer' : 'wrong-answer');
+    input.disabled = true;
+    const exp = document.getElementById(`num-explain-${qi}`);
+    exp.classList.add('show');
+    exp.querySelector('.verdict').textContent = isRight ? `Correct — answer is ${item.answer}` : `Incorrect — correct answer is ${item.answer}`;
+    exp.querySelector('.verdict').className = 'verdict ' + (isRight ? 'right' : 'wrong');
+    exp.querySelector('.body').innerHTML = item.explain;
+  });
+
+  const banner = document.getElementById('scoreBanner');
+  banner.classList.add('show');
+  document.getElementById('scoreBig').textContent = `${correctCount} / ${totalCount}`;
+  document.getElementById('scoreSub').textContent = `You answered ${correctCount} out of ${totalCount} questions correctly.`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  document.getElementById('checkBtn').disabled = true;
+  document.getElementById('checkBtn').style.opacity = 0.5;
+  document.getElementById('checkBtn').style.cursor = 'default';
+
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    window.MathJax.typesetPromise();
+  }
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  location.reload();
+});
+</script>
+
+</body>
+</html>
